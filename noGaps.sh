@@ -1,6 +1,6 @@
 #!/bin/bash
 
-##This script will remove gap-only columns from an alignment. All files need to be fasta format, and as written the file suffix must be .fas
+##This script will remove gap-only columns and columns with non-gaps in 4 or less taxa from an alignment. All files need to be fasta format, and as written the file suffix must be .fas
 
 echo "Removing gap-only columns..." 
 for FILENAME in *.fas
@@ -20,7 +20,7 @@ END { \
     if ( j in sequence ) { 
     $0 = sequence[j]
     for ( i = 1; i <= NF; i++)
-    if ( position[i] > 4 ) printf "%s", $i
+    if ( position[i] > 4 ) printf "%s", $i  ###4 is the number of taxa where if non-gaps are present in 4 or less taxa that column is removed. Can change to zero to make it so script only removes columns with all gaps.
     printf "\n"
     } \
   } \
